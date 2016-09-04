@@ -2,11 +2,13 @@
 
 namespace TwitchIRC.Common
 {
-    public delegate void RawMessageEventHandler(object sender, RawMessageEventArgs e);
+    /*public delegate void RawMessageEventHandler(object sender, RawMessageEventArgs e);
 
     public delegate void MessageEventHandler(object sender, MessageEventArgs e);
 
     public delegate void ConnectEventHandler(object sender, ConnectEventArgs e);
+
+    public delegate void ConnectionExceptionEventHandler(object sender, ConnectionExceptionEventArgs e);*/
 
     public class ConnectEventArgs : EventArgs
     {
@@ -32,6 +34,15 @@ namespace TwitchIRC.Common
         public MessageEventArgs(Message message) : base()
         {
             Message = message;
+        }
+    }
+
+    public class ConnectionExceptionEventArgs : EventArgs
+    {
+        public Exception InternalException { get; private set; }
+        public ConnectionExceptionEventArgs(Exception internalException) : base()
+        {
+            InternalException = internalException;
         }
     }
 }

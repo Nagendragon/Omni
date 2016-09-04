@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TwitchIRC.Common;
 
@@ -9,9 +10,13 @@ namespace TwitchIRC.Interfaces
         string Name { get; }
         IDictionary<string, ITwitchIRCChatter> Chatters { get; }
 
-        event RawMessageEventHandler OnRawMessage;
-        event MessageEventHandler OnMessage;
+        event EventHandler<RawMessageEventArgs> OnRawMessage;
+        event EventHandler<MessageEventArgs> OnMessage;
+
+        Task InvokeMessage(MessageEventArgs e);
+        Task InvokeRawMessage(RawMessageEventArgs e);
 
         Task SendToChat(string payload);
+        Task Leave();
     }
 }
