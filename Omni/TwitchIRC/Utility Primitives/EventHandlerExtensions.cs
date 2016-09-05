@@ -25,7 +25,9 @@ namespace TwitchIRC.Utility_Primitives
             try
             {
                 r.EndInvoke(ar);
-            }catch(Exception ex)
+            } catch (OperationCanceledException) {
+                tcs?.TrySetCanceled();
+            } catch (Exception ex)
             {
                 tcs?.TrySetException(ex);
             }
